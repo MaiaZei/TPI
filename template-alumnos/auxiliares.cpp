@@ -237,10 +237,7 @@ void cuadrante(tuple<tiempo, gps> p1,tuple<tiempo, gps> p2, int & j,int & k){
     double difLong = obtenerLongitud(obtenerPosicion(p1)) - obtenerLongitud(obtenerPosicion(p2));
     double difLat = obtenerLatitud(obtenerPosicion(p1)) - obtenerLatitud(obtenerPosicion(p2));
     //ESTOY EN EL PRIMER CUADRANTE
-    if(difLong>0 && difLat>0){
-        j = 1;
-        k = 1;
-    }
+    if(difLong>0 && difLat>0){j = 1;k = 1;}
     //ESTOY EN EL SEGUNDO CUADRANTE
     else if(difLong<0 && difLat>0){j = 1;k = -1;}
     //ESTOY EN EL TERCER CUADRANTE
