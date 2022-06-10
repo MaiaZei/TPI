@@ -237,7 +237,10 @@ void cuadrante(tuple<tiempo, gps> p1,tuple<tiempo, gps> p2, int & j,int & k){
     double difLong = obtenerLongitud(obtenerPosicion(p1)) - obtenerLongitud(obtenerPosicion(p2));
     double difLat = obtenerLatitud(obtenerPosicion(p1)) - obtenerLatitud(obtenerPosicion(p2));
     //ESTOY EN EL PRIMER CUADRANTE
-    if(difLong>0 && difLat>0){j = 1;k = 1;}
+    if(difLong>0 && difLat>0){
+        j = 1;
+        k = 1;
+    }
     //ESTOY EN EL SEGUNDO CUADRANTE
     else if(difLong<0 && difLat>0){j = 1;k = -1;}
     //ESTOY EN EL TERCER CUADRANTE
@@ -253,12 +256,12 @@ gps nuevaPos(tuple<tiempo, gps> p1,tuple<tiempo, gps> p2,tuple<tiempo, gps> erro
     double difLong = abs(obtenerLongitud(obtenerPosicion(p1)) - obtenerLongitud(obtenerPosicion(p2)));
     double difLat = abs(obtenerLatitud(obtenerPosicion(p1)) - obtenerLatitud(obtenerPosicion(p2)));
     double distancia = sqrt(pow(difLong,2) + pow(difLat,2));
-    double distAlErrroPorDifLongSobreDist = difLong/distancia*distanciaAlError;
-    double distAlErrroPorDifLatSobreDist = difLat/distancia*distanciaAlError;
+    double distLongAlErrorCorregido = difLong/distancia*distanciaAlError;
+    double distLatAlErrorCorregido = difLat/distancia*distanciaAlError;
     int j,k;
     cuadrante(p1,p2,j,k);
-    double longError =  obtenerLongitud(obtenerPosicion(p2)) +k*distAlErrroPorDifLongSobreDist;
-    double latError = obtenerLatitud(obtenerPosicion(p2)) + j*distAlErrroPorDifLatSobreDist;
+    double longError =  obtenerLongitud(obtenerPosicion(p2)) +k*distLongAlErrorCorregido;
+    double latError = obtenerLatitud(obtenerPosicion(p2)) + j*distLatAlErrorCorregido;
     return make_tuple(latError, longError);
 }
 
